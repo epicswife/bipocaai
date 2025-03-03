@@ -3,6 +3,9 @@
 import HeroSection from "@/components/homepage/hero-section/hero-section";
 import FeaturedLessonSection from "@/components/homepage/featured-lesson-section/featured-lesson-section";
 import RoleBasedSections from "@/components/homepage/role-based-sections/role-based-sections";
+import Testimonials from "@/components/homepage/testimonials/testimonials";
+import CTA from "@/components/homepage/cta/cta";
+import AccessibilityFeatures from "@/components/homepage/accessibility-features/accessibility-features";
 import CookieConsent from "@/components/features/cookie-consent/cookie-consent";
 
 export default function HomePage() {
@@ -11,6 +14,9 @@ export default function HomePage() {
       <HeroSection />
       <FeaturedLessonSection />
       <RoleBasedSections />
+      <Testimonials />
+      <AccessibilityFeatures />
+      <CTA />
       <CookieConsent />
     </div>
   );

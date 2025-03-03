@@ -16,17 +16,27 @@ export default function FeaturedLessonSection() {
         Featured Lessons
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto">
-        {mockLessons.map((lesson) => (
+        {mockLessons.map((lesson, index) => (
           <div
             key={lesson.id}
-            className="border border-teal-300 dark:border-cyan-600 rounded-lg p-4 sm:p-6 shadow-glow bg-white dark:bg-gray-700"
+            className={`border rounded-lg p-4 sm:p-6 shadow-glow bg-white dark:bg-gray-700 border-teal-300 dark:border-cyan-600 ${
+              index === 0 ? "border-purple-400 dark:border-blue-400" :
+              index === 1 ? "border-green-300 dark:border-yellow-300" :
+              "border-red-400 dark:border-red-400"
+            }`}
           >
             <h3 className="text-xl sm:text-2xl font-semibold text-black dark:text-white mb-2">
               {lesson.title}
             </h3>
             <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 mb-4">Source: {lesson.source}</p>
             <Link href={`/classrooms/${lesson.id}`}>
-              <Button className="w-full bg-amber-400 text-black hover:bg-gold-300 dark:bg-amber-600 dark:hover:bg-gold-500">
+              <Button
+                className={`w-full ${
+                  index === 0 ? "bg-purple-400 hover:bg-blue-400 dark:bg-purple-400 dark:hover:bg-blue-400" :
+                  index === 1 ? "bg-green-300 hover:bg-yellow-300 dark:bg-green-300 dark:hover:bg-yellow-300" :
+                  "bg-red-400 hover:bg-orange-400 dark:bg-red-400 dark:hover:bg-orange-400"
+                } text-black`}
+              >
                 Explore
               </Button>
             </Link>

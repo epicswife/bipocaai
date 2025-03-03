@@ -34,7 +34,7 @@ export default function HeroSection() {
           <Link href="/signup?role=student">
             <Button
               variant="default"
-              className="px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-semibold rounded-lg bg-amber-400 text-black hover:bg-gold-300 dark:bg-amber-600 dark:hover:bg-gold-500 shadow-glow"
+              className="px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-semibold rounded-lg bg-purple-400 text-black hover:bg-blue-400 dark:bg-purple-400 dark:hover:bg-blue-400 shadow-glow"
               aria-label="Join as a Student"
             >
               I’m a Student
@@ -43,7 +43,7 @@ export default function HeroSection() {
           <Link href="/signup?role=parent">
             <Button
               variant="default"
-              className="px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-semibold rounded-lg bg-amber-400 text-black hover:bg-gold-300 dark:bg-amber-600 dark:hover:bg-gold-500 shadow-glow"
+              className="px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-semibold rounded-lg bg-green-300 text-black hover:bg-yellow-300 dark:bg-green-300 dark:hover:bg-yellow-300 shadow-glow"
               aria-label="Join as a Parent"
             >
               I’m a Parent
@@ -52,7 +52,7 @@ export default function HeroSection() {
           <Link href="/signup?role=district">
             <Button
               variant="default"
-              className="px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-semibold rounded-lg bg-amber-400 text-black hover:bg-gold-300 dark:bg-amber-600 dark:hover:bg-gold-500 shadow-glow"
+              className="px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-semibold rounded-lg bg-blue-400 text-black hover:bg-blue-400 dark:bg-blue-400 dark:hover:bg-blue-400 shadow-glow"
               aria-label="District Sign Up"
             >
               District Sign Up

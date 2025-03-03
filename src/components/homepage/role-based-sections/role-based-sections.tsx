@@ -36,7 +36,7 @@ export default function RoleBasedSections() {
         Your Learning Path
       </h2>
       <div className="max-w-5xl mx-auto">
-        <Card className="bg-white dark:bg-gray-700 border-gold-300 dark:border-teal-700">
+        <Card className="bg-white dark:bg-gray-700 border-gold-300 dark:border-teal-700 shadow-glow">
           <CardHeader>
             <CardTitle className="text-xl sm:text-2xl text-black dark:text-white">
               {sections[role].title}
