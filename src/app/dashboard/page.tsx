@@ -1,22 +1,25 @@
 "use client";
 
-import { useState, useEffect, JSX } from "react";
+import React, { JSX } from "react";
+import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { User, UserRole } from "@/lib/types";
+import { useAuth } from "@/context/AuthContext";
+import { UserRole } from "@/lib/types";
 
 export default function DashboardPage() {
-  const [user, setUser] = useState<User | null>(null);
-  const [isMounted, setIsMounted] = useState(false);
+  const { user, loading } = useAuth();
+  const router = useRouter();
 
-  useEffect(() => {
-    setIsMounted(true);
-    // Mock user data; replace with Firebase fetch later
-    setUser({ role: "student", name: "Jane Doe", email: "jane.doe@example.com" });
-  }, []);
+  // Redirect to login if not authenticated
+  if (!loading && !user) {
+    router.push("/login");
+    return null;
+  }
 
-  if (!isMounted || !user) return null;
+  // Show loading state
+  if (loading) return <div>Loading...</div>;
 
   const dashboardContent: Record<UserRole, JSX.Element> = {
     student: (
@@ -146,9 +149,9 @@ export default function DashboardPage() {
   return (
     <div className="p-4 sm:p-6 lg:p-8 max-w-5xl mx-auto">
       <h1 className="text-3xl sm:text-4xl font-orbitron font-bold text-black dark:text-white mb-8">
-        Welcome, {user.name}!
+        Welcome, {user?.name || 'User'}!
       </h1>
-      {dashboardContent[user.role]}
+      {user && dashboardContent[user.role]}
     </div>
   );
 }

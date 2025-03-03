@@ -1,28 +1,37 @@
 "use client";
 
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, ChangeEvent } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { User } from "@/lib/types";
+import { useAuth } from "@/context/AuthContext";
+import { auth, db } from "@/lib/firebase";
+import { updateProfile } from "firebase/auth";
+import { doc, updateDoc } from "firebase/firestore";
+import { toast } from "sonner";
 
 export default function ProfilesPage() {
-  const [user, setUser] = useState<User | null>(null);
+  const { user, loading } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState("");
-  const [isMounted, setIsMounted] = useState(false);
+  const router = useRouter();
 
-  useEffect(() => {
-    setIsMounted(true);
-    // Mock user data; replace with Firebase fetch later
-    setUser({ name: "Jane Doe", role: "student", email: "jane.doe@example.com" });
-    setName("Jane Doe");
-  }, []);
+  const handleSave = async () => {
+    if (!user || !auth.currentUser) return;
 
-  const handleSave = () => {
-    if (user) {
-      setUser({ ...user, name });
+    try {
+      // Update Firebase user profile
+      await updateProfile(auth.currentUser, { displayName: name });
+
+      // Update Firestore user document
+      await updateDoc(doc(db, "users", auth.currentUser.uid), { name });
+
+      toast.success("Profile updated successfully!");
       setIsEditing(false);
+    } catch (error: Error | unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Error updating profile";
+      toast.error(errorMessage);
     }
   };
 
@@ -30,7 +39,14 @@ export default function ProfilesPage() {
     setName(e.target.value);
   };
 
-  if (!isMounted || !user) return null;
+  // Redirect to login if not authenticated
+  if (!loading && !user) {
+    router.push("/login");
+    return null;
+  }
+
+  // Show loading state
+  if (loading) return <div>Loading...</div>;
 
   return (
     <div className="p-4 sm:p-6 lg:p-8 max-w-5xl mx-auto">
@@ -62,10 +78,16 @@ export default function ProfilesPage() {
             </div>
           ) : (
             <div className="space-y-4">
-              <p className="text-black dark:text-white"><strong>Name:</strong> {user.name}</p>
-              <p className="text-black dark:text-white"><strong>Role:</strong> {user.role}</p>
-              <p className="text-black dark:text-white"><strong>Email:</strong> {user.email}</p>
-              <Button onClick={() => setIsEditing(true)} className="bg-green-300 text-black hover:bg-yellow-300 dark:bg-green-300 dark:hover:bg-yellow-300">
+              <p className="text-black dark:text-white"><strong>Name:</strong> {user?.name}</p>
+              <p className="text-black dark:text-white"><strong>Role:</strong> {user?.role}</p>
+              <p className="text-black dark:text-white"><strong>Email:</strong> {user?.email}</p>
+              <Button 
+                onClick={() => { 
+                  setIsEditing(true); 
+                  if (user) setName(user.name); 
+                }} 
+                className="bg-green-300 text-black hover:bg-yellow-300 dark:bg-green-300 dark:hover:bg-yellow-300"
+              >
                 Edit Profile
               </Button>
             </div>

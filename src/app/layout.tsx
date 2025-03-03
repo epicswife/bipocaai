@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
 import { Orbitron } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/global/navbar";
 import Footer from "@/components/global/footer";
+import { AuthProvider } from "@/context/AuthContext";
+
+const inter = Inter({
+  variable: "--font-sans",
+  subsets: ["latin"],
+});
 
 const orbitron = Orbitron({
   variable: "--font-orbitron",
@@ -18,16 +25,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body
-        className={`${orbitron.variable} antialiased min-h-screen flex flex-col w-full bg-gray-100 dark:bg-gray-900`}
+        className={`${inter.variable} ${orbitron.variable} antialiased min-h-screen flex flex-col w-full bg-gray-100 dark:bg-gray-900`}
       >
         <ThemeProvider
           attribute="class"
@@ -35,9 +42,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          <AuthProvider>
+            <Navbar />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>
