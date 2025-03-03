@@ -22,38 +22,42 @@ export default function HeroSection() {
           Join millions using BIPOCA AI to achieve their educational goals.
         </p>
         <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
-          <Button
-            variant="default"
-            className="px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-semibold rounded-lg bg-amber-400 text-black hover:bg-gold-300 dark:bg-amber-600 dark:hover:bg-gold-500 shadow-glow"
-            asChild
-            aria-label="Join as a Teacher"
-          >
-            <Link href="/signup?role=teacher">I’m a Teacher</Link>
-          </Button>
-          <Button
-            variant="default"
-            className="px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-semibold rounded-lg bg-amber-400 text-black hover:bg-gold-300 dark:bg-amber-600 dark:hover:bg-gold-500 shadow-glow"
-            asChild
-            aria-label="Join as a Student"
-          >
-            <Link href="/signup?role=student">I’m a Student</Link>
-          </Button>
-          <Button
-            variant="default"
-            className="px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-semibold rounded-lg bg-amber-400 text-black hover:bg-gold-300 dark:bg-amber-600 dark:hover:bg-gold-500 shadow-glow"
-            asChild
-            aria-label="Join as a Parent"
-          >
-            <Link href="/signup?role=parent">I’m a Parent</Link>
-          </Button>
-          <Button
-            variant="default"
-            className="px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-semibold rounded-lg bg-amber-400 text-black hover:bg-gold-300 dark:bg-amber-600 dark:hover:bg-gold-500 shadow-glow"
-            asChild
-            aria-label="District Sign Up"
-          >
-            <Link href="/signup?role=district">District Sign Up</Link>
-          </Button>
+          <Link href="/signup?role=teacher">
+            <Button
+              variant="default"
+              className="px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-semibold rounded-lg bg-amber-400 text-black hover:bg-gold-300 dark:bg-amber-600 dark:hover:bg-gold-500 shadow-glow"
+              aria-label="Join as a Teacher"
+            >
+              I’m a Teacher
+            </Button>
+          </Link>
+          <Link href="/signup?role=student">
+            <Button
+              variant="default"
+              className="px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-semibold rounded-lg bg-amber-400 text-black hover:bg-gold-300 dark:bg-amber-600 dark:hover:bg-gold-500 shadow-glow"
+              aria-label="Join as a Student"
+            >
+              I’m a Student
+            </Button>
+          </Link>
+          <Link href="/signup?role=parent">
+            <Button
+              variant="default"
+              className="px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-semibold rounded-lg bg-amber-400 text-black hover:bg-gold-300 dark:bg-amber-600 dark:hover:bg-gold-500 shadow-glow"
+              aria-label="Join as a Parent"
+            >
+              I’m a Parent
+            </Button>
+          </Link>
+          <Link href="/signup?role=district">
+            <Button
+              variant="default"
+              className="px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-semibold rounded-lg bg-amber-400 text-black hover:bg-gold-300 dark:bg-amber-600 dark:hover:bg-gold-500 shadow-glow"
+              aria-label="District Sign Up"
+            >
+              District Sign Up
+            </Button>
+          </Link>
         </div>
       </motion.div>
       <svg

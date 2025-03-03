@@ -24,8 +24,8 @@ export default function RoleBasedSections() {
     teacher: { title: "Teachers", content: "Upload lessons and track progress." },
     parent: { title: "Parents", content: "Support your child’s learning." },
     admin: { title: "Admins", content: "Manage district dashboards." },
-    counselor: { title: "Counselors", content: "Support student mental health." },
-    social_worker: { title: "Social Workers", content: "Assist students and parents." },
+    counselor: { title: "Counselors", content: "Support students and parents." },
+    social_worker: { title: "Social Workers", content: "Assist families with resources." },
   };
 
   const role = mockUser.role;
