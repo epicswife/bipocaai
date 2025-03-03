@@ -8,13 +8,13 @@ export default function Footer() {
           © 2025 BIPOCA AI. All rights reserved.
         </p>
         <div className="flex flex-wrap gap-4">
-          <Link href="/privacy" className="hover:underline text-foreground high-contrast:text-foreground" aria-label="Privacy Policy">
+          <Link href="/legal/privacy" className="hover:underline text-foreground high-contrast:text-foreground" aria-label="Privacy Policy">
             Privacy Policy
           </Link>
-          <Link href="/terms" className="hover:underline text-foreground high-contrast:text-foreground" aria-label="Terms of Service">
+          <Link href="/legal/terms" className="hover:underline text-foreground high-contrast:text-foreground" aria-label="Terms of Service">
             Terms of Service
           </Link>
-          <Link href="/accessibility" className="hover:underline text-foreground high-contrast:text-foreground" aria-label="Accessibility">
+          <Link href="/legal/accessibility" className="hover:underline text-foreground high-contrast:text-foreground" aria-label="Accessibility">
             Accessibility
           </Link>
         </div>
