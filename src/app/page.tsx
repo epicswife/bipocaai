@@ -1,27 +1,42 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import HeroSection from "@/components/homepage/hero-section/hero-section";
-import FeaturedLessonSection from "@/components/homepage/featured-lesson-section/featured-lesson-section";
-import RoleBasedSections from "@/components/homepage/role-based-sections/role-based-sections";
-import Testimonials from "@/components/homepage/testimonials/testimonials";
-import CTA from "@/components/homepage/cta/cta";
-import CookieConsent from "@/components/features/cookie-consent/cookie-consent";
-import { Course } from "@/lib/types";
-import { fetchBlackFactsLessons } from "@/services/blackfacts";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Users, BookOpen, Heart, Globe, Zap, Brain, Target, Shield, GraduationCap, Smartphone, Accessibility } from "lucide-react";
-import { motion } from "framer-motion";
+import { fetchBlackFactsLessons } from "@/services/blackfacts";
+import { Course } from "@/lib/types";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import CookieConsent from "@/components/features/cookie-consent/cookie-consent";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import {
+  Users,
+  BookOpen,
+  Globe,
+  Zap,
+  Brain,
+  Target,
+  Shield,
+  Building2,
+  Smartphone,
+  Accessibility,
+  GraduationCap,
+} from "lucide-react";
 
-// Partner logos (using real paths for assets)
+// Partner logos (real paths)
 const partnerLogos = {
   blackfacts: "/assets/partners/blackfacts-logo.png",
   fau: "/assets/partners/fau-logo.png",
   legacy: "/assets/partners/legacy-education-logo.png",
 };
+
+// Role-based quick access data
+const roles = [
+  { role: "student", label: "I’m a Student", href: "/signup?role=student", icon: <GraduationCap className="w-8 h-8" /> },
+  { role: "teacher", label: "I’m a Teacher", href: "/signup?role=teacher", icon: <BookOpen className="w-8 h-8" /> },
+  { role: "parent", label: "I’m a Parent", href: "/signup?role=parent", icon: <Users className="w-8 h-8" /> },
+  { role: "admin", label: "District Admin", href: "/signup?role=admin", icon: <Building2 className="w-8 h-8" /> },
+];
 
 export default function HomePage() {
   const [lessons, setLessons] = useState<Course[]>([]);
@@ -29,25 +44,129 @@ export default function HomePage() {
   useEffect(() => {
     const loadLessons = async () => {
       const fetchedLessons = await fetchBlackFactsLessons();
-      setLessons(fetchedLessons.filter((lesson) => lesson.isFeatured));
+      setLessons(fetchedLessons.filter((lesson) => lesson.isFeatured).slice(0, 3)); // Limit to 3 for display
     };
     loadLessons();
   }, []);
 
   return (
     <div className="flex flex-col">
-      {/* Hero Section - Updated in previous steps, kept for continuity */}
-      <HeroSection />
+      {/* Hero Section */}
+      <section className="relative py-24 px-4 sm:py-32 sm:px-6 lg:px-8 text-center bg-gradient-gold-cyan dark:bg-gradient-gold-cyan visionease:bg-gradient-gray-dark high-contrast:bg-gradient-gray-dark">
+        <motion.div
+          className="max-w-7xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
+          <motion.div
+            className="mb-8"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <div className="w-32 h-32 mx-auto bg-gray-300 dark:bg-gray-700 visionease:bg-gray-300 high-contrast:bg-gray-300 rounded-full flex items-center justify-center">
+              <span className="text-foreground text-sm text-center">BIPOCA AI Logo Placeholder</span>
+            </div>
+          </motion.div>
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-orbitron font-bold text-foreground mb-6">
+            Your Future of Learning Starts Here
+          </h1>
+          <p className="text-xl sm:text-2xl md:text-3xl text-muted-foreground mb-10 max-w-3xl mx-auto">
+            Empowering Black, Indigenous, People of Color, and Allies with AI-driven education—accessible anywhere, on any device, for everyone.
+          </p>
+          <Link href="/signup">
+            <Button
+              className="px-8 py-4 text-lg font-semibold rounded-lg bg-primary hover:bg-secondary dark:bg-secondary dark:hover:bg-primary visionease:bg-primary visionease:hover:bg-secondary high-contrast:bg-primary high-contrast:hover:bg-primary text-primary-foreground shadow-glow"
+              aria-label="Get Started with BIPOCA AI"
+            >
+              Get Started
+            </Button>
+          </Link>
+        </motion.div>
+        <svg
+          className="absolute bottom-0 left-0 w-full h-24 text-background dark:text-background visionease:text-background high-contrast:text-background"
+          viewBox="0 0 1440 100"
+          preserveAspectRatio="none"
+        >
+          <path d="M0 100 C360 50 1080 50 1440 100 L1440 100 L0 100 Z" fill="currentColor" />
+        </svg>
+      </section>
 
-      {/* Featured Lessons Section - Updated in previous steps */}
-      <FeaturedLessonSection lessons={lessons} />
+      {/* Quick Access Navigation */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-background">
+        <h2 className="text-3xl sm:text-4xl font-orbitron font-bold text-center text-foreground mb-8">
+          Start Your Journey Today
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+          {roles.map((role, index) => (
+            <motion.div
+              key={role.role}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <Link href={role.href}>
+                <Card className="bg-card border-primary dark:border-secondary visionease:border-primary high-contrast:border-primary shadow-glow glassmorphism hover:scale-105 transition-transform">
+                  <CardHeader className="flex justify-center">
+                    {role.icon}
+                  </CardHeader>
+                  <CardContent className="text-center">
+                    <h3 className="text-xl font-semibold text-foreground">{role.label}</h3>
+                  </CardContent>
+                </Card>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+      </section>
 
-      {/* Why Choose BIPOCA AI */}
+      {/* Featured Lessons Showcase */}
       <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gradient-gray-dark dark:bg-gradient-gray-dark visionease:bg-gradient-gray-dark high-contrast:bg-gradient-gray-dark">
         <h2 className="text-3xl sm:text-4xl font-orbitron font-bold text-center text-foreground mb-8">
-          Why Choose BIPOCA AI?
+          Explore Our Featured Lessons
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+          {lessons.map((lesson, index) => (
+            <motion.div
+              key={lesson.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <Card className="bg-card border-secondary dark:border-primary visionease:border-primary high-contrast:border-primary shadow-glow glassmorphism hover:scale-105 transition-transform">
+                <CardHeader>
+                  <CardTitle className="text-xl sm:text-2xl text-foreground">{lesson.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm sm:text-base text-muted-foreground mb-4">Source: {lesson.source}</p>
+                  <Link href={`/classrooms/${lesson.id}`}>
+                    <Button className="w-full bg-primary hover:bg-secondary dark:bg-secondary dark:hover:bg-primary visionease:bg-primary visionease:hover:bg-secondary high-contrast:bg-primary high-contrast:hover:bg-primary text-primary-foreground">
+                      Explore Lesson
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+        <div className="mt-8 text-center">
+          <Link href="/courses">
+            <Button className="bg-primary hover:bg-secondary dark:bg-secondary dark:hover:bg-primary visionease:bg-primary visionease:hover:bg-secondary high-contrast:bg-primary high-contrast:hover:bg-primary text-primary-foreground shadow-glow">
+              View All Courses
+            </Button>
+          </Link>
+        </div>
+      </section>
+
+      {/* AI-Powered Learning Features */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-background">
+        <h2 className="text-3xl sm:text-4xl font-orbitron font-bold text-center text-foreground mb-8">
+          Learning Powered by AI
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -56,12 +175,12 @@ export default function HomePage() {
           >
             <Card className="bg-card border-primary dark:border-secondary visionease:border-primary high-contrast:border-primary shadow-glow glassmorphism">
               <CardHeader className="flex justify-center">
-                <Users className="w-12 h-12 text-primary dark:text-secondary visionease:text-primary high-contrast:text-primary" />
+                <Zap className="w-12 h-12 text-primary dark:text-secondary visionease:text-primary high-contrast:text-primary" />
               </CardHeader>
               <CardContent className="text-center">
-                <h3 className="text-xl font-semibold text-foreground mb-2">Inclusive Learning</h3>
+                <h3 className="text-xl font-semibold text-foreground mb-2">Personalized Learning</h3>
                 <p className="text-muted-foreground">
-                  Designed for Black, Indigenous, People of Color, and Allies, ensuring education for all, no matter where they are.
+                  AI tailors lessons and quizzes to your unique learning pace and style, ensuring you succeed.
                 </p>
               </CardContent>
             </Card>
@@ -74,12 +193,12 @@ export default function HomePage() {
           >
             <Card className="bg-card border-primary dark:border-secondary visionease:border-primary high-contrast:border-primary shadow-glow glassmorphism">
               <CardHeader className="flex justify-center">
-                <BookOpen className="w-12 h-12 text-primary dark:text-secondary visionease:text-primary high-contrast:text-primary" />
+                <Brain className="w-12 h-12 text-primary dark:text-secondary visionease:text-primary high-contrast:text-primary" />
               </CardHeader>
               <CardContent className="text-center">
-                <h3 className="text-xl font-semibold text-foreground mb-2">Rich Content</h3>
+                <h3 className="text-xl font-semibold text-foreground mb-2">Smart Search</h3>
                 <p className="text-muted-foreground">
-                  Access lessons from BlackFacts.com, Legacy Education, and more, with live classrooms and interactive quizzes.
+                  [Perplexity AI Placeholder] Instantly find answers and resources with AI-driven search.
                 </p>
               </CardContent>
             </Card>
@@ -92,12 +211,12 @@ export default function HomePage() {
           >
             <Card className="bg-card border-primary dark:border-secondary visionease:border-primary high-contrast:border-primary shadow-glow glassmorphism">
               <CardHeader className="flex justify-center">
-                <Heart className="w-12 h-12 text-primary dark:text-secondary visionease:text-primary high-contrast:text-primary" />
+                <Target className="w-12 h-12 text-primary dark:text-secondary visionease:text-primary high-contrast:text-primary" />
               </CardHeader>
               <CardContent className="text-center">
-                <h3 className="text-xl font-semibold text-foreground mb-2">Supportive Community</h3>
+                <h3 className="text-xl font-semibold text-foreground mb-2">Gamified Experience</h3>
                 <p className="text-muted-foreground">
-                  Chat with peers, access mental health tools, and join a global community of learners from anywhere.
+                  Earn badges and rewards as you learn, keeping you motivated with AI-driven gamification.
                 </p>
               </CardContent>
             </Card>
@@ -110,12 +229,12 @@ export default function HomePage() {
           >
             <Card className="bg-card border-primary dark:border-secondary visionease:border-primary high-contrast:border-primary shadow-glow glassmorphism">
               <CardHeader className="flex justify-center">
-                <Globe className="w-12 h-12 text-primary dark:text-secondary visionease:text-primary high-contrast:text-primary" />
+                <Shield className="w-12 h-12 text-primary dark:text-secondary visionease:text-primary high-contrast:text-primary" />
               </CardHeader>
               <CardContent className="text-center">
-                <h3 className="text-xl font-semibold text-foreground mb-2">Global Access</h3>
+                <h3 className="text-xl font-semibold text-foreground mb-2">Secure & Safe</h3>
                 <p className="text-muted-foreground">
-                  Learn anytime, anywhere, on any device—desktop, tablet, or smartphone—with full accessibility.
+                  Your data is protected with state-of-the-art security, ensuring a safe learning environment.
                 </p>
               </CardContent>
             </Card>
@@ -123,25 +242,22 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Role-Based Sections - Updated in previous steps */}
-      <RoleBasedSections />
-
-      {/* Accessibility Features with AI Emphasis */}
-      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-background">
+      {/* Accessibility Commitment */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gradient-gold-cyan dark:bg-gradient-gold-cyan visionease:bg-gradient-gray-dark high-contrast:bg-gradient-gray-dark">
         <h2 className="text-3xl sm:text-4xl font-orbitron font-bold text-center text-foreground mb-8">
-          AI-Driven Accessibility for All
+          Accessibility for Everyone
         </h2>
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="flex flex-col justify-center">
               <h3 className="text-2xl font-semibold text-foreground mb-4">
-                Personalized Learning with AI
+                AI-Powered Accessibility
               </h3>
               <p className="text-muted-foreground mb-4">
-                Our advanced AI technology creates Individualized Education Programs (IEPs) tailored to each student’s needs. We support students with Intellectual and Developmental Disabilities (IDD) and other accessibility constraints, ensuring everyone can thrive.
+                BIPOCA AI leverages advanced AI to create Individualized Education Programs (IEPs) for students with special needs, including those with Intellectual and Developmental Disabilities (IDD). Our platform supports voice navigation, screen reader enhancements, and calming tools to ensure learning is accessible to all.
               </p>
               <p className="text-muted-foreground">
-                Features like voice navigation, screen reader enhancements, and calming tools are powered by AI to make learning accessible for all, no matter the challenge.
+                With universal design principles, we make education inclusive for everyone, regardless of ability or device.
               </p>
             </div>
             <motion.div
@@ -172,7 +288,7 @@ export default function HomePage() {
                 <CardContent className="text-center">
                   <h3 className="text-xl font-semibold text-foreground mb-2">AI for IEPs</h3>
                   <p className="text-muted-foreground">
-                    Our AI creates customized IEPs for students with special needs, ensuring personalized learning paths.
+                    Personalized IEPs for students with special needs, powered by AI.
                   </p>
                 </CardContent>
               </Card>
@@ -188,9 +304,9 @@ export default function HomePage() {
                   <Brain className="w-12 h-12 text-primary dark:text-secondary visionease:text-primary high-contrast:text-primary" />
                 </CardHeader>
                 <CardContent className="text-center">
-                  <h3 className="text-xl font-semibold text-foreground mb-2">Support for IDD</h3>
+                  <h3 className="text-xl font-semibold text-foreground mb-2">IDD Support</h3>
                   <p className="text-muted-foreground">
-                    AI-driven tools assist students with Intellectual and Developmental Disabilities, making education accessible.
+                    AI tools for students with Intellectual and Developmental Disabilities.
                   </p>
                 </CardContent>
               </Card>
@@ -208,7 +324,7 @@ export default function HomePage() {
                 <CardContent className="text-center">
                   <h3 className="text-xl font-semibold text-foreground mb-2">Universal Design</h3>
                   <p className="text-muted-foreground">
-                    Built with universal design principles to ensure accessibility for all abilities and devices.
+                    Inclusive design for all abilities and devices.
                   </p>
                 </CardContent>
               </Card>
@@ -217,8 +333,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Global Reach Section */}
-      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gradient-gold-cyan dark:bg-gradient-gold-cyan visionease:bg-gradient-gray-dark high-contrast:bg-gradient-gray-dark">
+      {/* Global Reach & Device Compatibility */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-background">
         <h2 className="text-3xl sm:text-4xl font-orbitron font-bold text-center text-foreground mb-8">
           Learn Anywhere, on Any Device
         </h2>
@@ -239,13 +355,13 @@ export default function HomePage() {
             </motion.div>
             <div className="flex flex-col justify-center">
               <h3 className="text-2xl font-semibold text-foreground mb-4">
-                Global Access for Everyone
+                Education Without Borders
               </h3>
               <p className="text-muted-foreground mb-4">
-                BIPOCA AI is designed to work seamlessly on any device—whether you’re on a desktop in New York, a tablet in Nairobi, or a smartphone in Tokyo. Our platform ensures that education is accessible to everyone, no matter where you are or what device you use.
+                Whether you’re on a desktop in New York, a tablet in Nairobi, or a smartphone in Tokyo, BIPOCA AI delivers a seamless learning experience. Our platform is optimized for all devices, ensuring education is accessible to everyone, everywhere.
               </p>
               <p className="text-muted-foreground">
-                With adaptive design and AI-driven optimizations, we deliver a consistent, high-quality learning experience across all platforms, ensuring no one is left behind.
+                With AI-driven optimizations, we adapt to your device and network conditions, providing uninterrupted access to learning resources—no matter where you are.
               </p>
             </div>
           </div>
@@ -264,133 +380,77 @@ export default function HomePage() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <GraduationCap className="w-16 h-16 text-primary dark:text-secondary visionease:text-primary high-contrast:text-primary" />
+              <Globe className="w-16 h-16 text-primary dark:text-secondary visionease:text-primary high-contrast:text-primary" />
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Testimonials - Will be updated in the next step */}
-      <Testimonials />
-
-      {/* AI Integration Highlights */}
-      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-background">
-        <h2 className="text-3xl sm:text-4xl font-orbitron font-bold text-center text-foreground mb-8">
-          Powered by Advanced AI
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <Card className="bg-card border-primary dark:border-secondary visionease:border-primary high-contrast:border-primary shadow-glow glassmorphism">
-              <CardHeader className="flex justify-center">
-                <Zap className="w-12 h-12 text-primary dark:text-secondary visionease:text-primary high-contrast:text-primary" />
-              </CardHeader>
-              <CardContent className="text-center">
-                <h3 className="text-xl font-semibold text-foreground mb-2">AI-Powered Learning</h3>
-                <p className="text-muted-foreground">
-                  Personalized lesson plans and quizzes using advanced AI technology to adapt to your learning pace.
-                </p>
-              </CardContent>
-            </Card>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            <Card className="bg-card border-primary dark:border-secondary visionease:border-primary high-contrast:border-primary shadow-glow glassmorphism">
-              <CardHeader className="flex justify-center">
-                <Brain className="w-12 h-12 text-primary dark:text-secondary visionease:text-primary high-contrast:text-primary" />
-              </CardHeader>
-              <CardContent className="text-center">
-                <h3 className="text-xl font-semibold text-foreground mb-2">Smart Search (Perplexity AI)</h3>
-                <p className="text-muted-foreground">
-                  [Perplexity AI Placeholder] Instantly find answers and resources with AI-driven search capabilities.
-                </p>
-              </CardContent>
-            </Card>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <Card className="bg-card border-primary dark:border-secondary visionease:border-primary high-contrast:border-primary shadow-glow glassmorphism">
-              <CardHeader className="flex justify-center">
-                <Target className="w-12 h-12 text-primary dark:text-secondary visionease:text-primary high-contrast:text-primary" />
-              </CardHeader>
-              <CardContent className="text-center">
-                <h3 className="text-xl font-semibold text-foreground mb-2">Gamified Learning</h3>
-                <p className="text-muted-foreground">
-                  Earn badges and rewards as you progress, keeping you motivated with AI-driven gamification.
-                </p>
-              </CardContent>
-            </Card>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <Card className="bg-card border-primary dark:border-secondary visionease:border-primary high-contrast:border-primary shadow-glow glassmorphism">
-              <CardHeader className="flex justify-center">
-                <Shield className="w-12 h-12 text-primary dark:text-secondary visionease:text-primary high-contrast:text-primary" />
-              </CardHeader>
-              <CardContent className="text-center">
-                <h3 className="text-xl font-semibold text-foreground mb-2">Secure Platform</h3>
-                <p className="text-muted-foreground">
-                  Your data is protected with state-of-the-art security, ensuring a safe learning environment.
-                </p>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Our Impact */}
+      {/* Testimonials & Impact */}
       <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gradient-gray-dark dark:bg-gradient-gray-dark visionease:bg-gradient-gray-dark high-contrast:bg-gradient-gray-dark">
         <h2 className="text-3xl sm:text-4xl font-orbitron font-bold text-center text-foreground mb-8">
-          Our Impact
+          Our Community & Impact
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <p className="text-4xl font-orbitron font-bold text-foreground">1M+</p>
-            <p className="text-muted-foreground">Students Empowered Globally</p>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            <p className="text-4xl font-orbitron font-bold text-foreground">500K+</p>
-            <p className="text-muted-foreground">Lessons Delivered Worldwide</p>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <p className="text-4xl font-orbitron font-bold text-foreground">10K+</p>
-            <p className="text-muted-foreground">Teachers Supported Globally</p>
-          </motion.div>
+        <div className="max-w-7xl mx-auto">
+          {/* Testimonials */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            {[
+              { name: "Sarah M., Student", quote: "BIPOCA AI made learning Black history so engaging! The platform is intuitive and accessible on my phone." },
+              { name: "John D., Teacher", quote: "I love how easy it is to create quizzes and lessons. My students are thriving with the AI tools!" },
+              { name: "Emily R., Parent", quote: "The IEP support and mental health tools have been a game-changer for my child’s education." },
+            ].map((testimonial, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <Card className="bg-card border-secondary dark:border-primary visionease:border-primary high-contrast:border-primary shadow-glow glassmorphism">
+                  <CardHeader>
+                    <CardTitle className="text-xl sm:text-2xl text-foreground">{testimonial.name}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm sm:text-base text-muted-foreground">&quot;{testimonial.quote}&quot;</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+          {/* Impact Stats */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <p className="text-4xl font-orbitron font-bold text-foreground">1M+</p>
+              <p className="text-muted-foreground">Students Empowered Globally</p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <p className="text-4xl font-orbitron font-bold text-foreground">500K+</p>
+              <p className="text-muted-foreground">Lessons Delivered Worldwide</p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <p className="text-4xl font-orbitron font-bold text-foreground">10K+</p>
+              <p className="text-muted-foreground">Teachers Supported Globally</p>
+            </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Partner Highlights */}
+      {/* Partner Ecosystem */}
       <section className="py-12 px-4 sm:px-6 lg:px-8 bg-background">
         <h2 className="text-3xl sm:text-4xl font-orbitron font-bold text-center text-foreground mb-8">
           Our Trusted Partners
@@ -447,13 +507,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Mission Statement */}
+      {/* Mission & Vision */}
       <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gradient-gold-cyan dark:bg-gradient-gold-cyan visionease:bg-gradient-gray-dark high-contrast:bg-gradient-gray-dark text-center">
         <h2 className="text-3xl sm:text-4xl font-orbitron font-bold text-foreground mb-4">
-          Our Mission
+          Our Mission & Vision
         </h2>
-        <p className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-          BIPOCA AI is dedicated to breaking down educational barriers for Black, Indigenous, People of Color, and Allies worldwide. We provide free, inclusive, AI-driven learning for students, teachers, and parents, with advanced tools for districts to ensure every learner succeeds—anywhere, anytime, on any device.
+        <p className="text-lg sm:text-xl text-muted-foreground mb-4 max-w-3xl mx-auto">
+          BIPOCA AI is on a mission to break down educational barriers for Black, Indigenous, People of Color, and Allies worldwide. We envision a future where education is limitless, powered by AI to provide personalized, accessible learning for every individual, regardless of location, device, or ability.
         </p>
         <Link href="/about">
           <Button className="bg-primary hover:bg-secondary dark:bg-secondary dark:hover:bg-primary visionease:bg-primary visionease:hover:bg-secondary high-contrast:bg-primary high-contrast:hover:bg-primary text-primary-foreground shadow-glow">
@@ -462,10 +522,22 @@ export default function HomePage() {
         </Link>
       </section>
 
-      {/* Final CTA - Updated in previous steps */}
-      <CTA />
+      {/* Final Call-to-Action */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-background text-center">
+        <h2 className="text-3xl sm:text-4xl font-orbitron font-bold text-foreground mb-4">
+          Ready to Transform Education?
+        </h2>
+        <p className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+          Join millions of learners, educators, and districts using BIPOCA AI to empower the next generation. Start your journey today!
+        </p>
+        <Link href="/signup">
+          <Button className="px-8 py-4 text-lg font-semibold rounded-lg bg-primary hover:bg-secondary dark:bg-secondary dark:hover:bg-primary visionease:bg-primary visionease:hover:bg-secondary high-contrast:bg-primary high-contrast:hover:bg-primary text-primary-foreground shadow-glow">
+            Join BIPOCA AI Now
+          </Button>
+        </Link>
+      </section>
 
-      {/* Cookie Consent - Updated in previous steps */}
+      {/* Cookie Consent */}
       <CookieConsent />
     </div>
   );
