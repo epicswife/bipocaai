@@ -69,10 +69,14 @@ export default function HomePage() {
               <span className="text-foreground text-sm text-center">BIPOCA AI Logo Placeholder</span>
             </div>
           </motion.div>
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-orbitron font-bold text-foreground mb-6">
+          <h1
+            className="text-5xl sm:text-6xl md:text-7xl dark:text-gray-800 font-orbitron font-bold text-foreground mb-6"
+          >
             Your Future of Learning Starts Here
           </h1>
-          <p className="text-xl sm:text-2xl md:text-3xl text-muted-foreground mb-10 max-w-3xl mx-auto">
+          <p
+            className="text-xl sm:text-2xl md:text-3xl text-muted-foreground mb-10 max-w-3xl mx-auto dark:text-gray-700"
+          >
             Empowering Black, Indigenous, People of Color, and Allies with AI-driven education—accessible anywhere, on any device, for everyone.
           </p>
           <Link href="/signup">
@@ -244,19 +248,19 @@ export default function HomePage() {
 
       {/* Accessibility Commitment */}
       <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gradient-gold-cyan dark:bg-gradient-gold-cyan visionease:bg-gradient-gray-dark high-contrast:bg-gradient-gray-dark">
-        <h2 className="text-3xl sm:text-4xl font-orbitron font-bold text-center text-foreground mb-8">
+        <h2 className="text-3xl sm:text-4xl font-orbitron font-bold text-center dark:text-gray-800 text-foreground mb-8">
           Accessibility for Everyone
         </h2>
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="flex flex-col justify-center">
-              <h3 className="text-2xl font-semibold text-foreground mb-4">
+              <h3 className="text-2xl font-semibold dark:text-gray-800 text-foreground mb-4">
                 AI-Powered Accessibility
               </h3>
-              <p className="text-muted-foreground mb-4">
+              <p className="text-muted-foreground dark:text-gray-700 mb-4">
                 BIPOCA AI leverages advanced AI to create Individualized Education Programs (IEPs) for students with special needs, including those with Intellectual and Developmental Disabilities (IDD). Our platform supports voice navigation, screen reader enhancements, and calming tools to ensure learning is accessible to all.
               </p>
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground dark:text-gray-700">
                 With universal design principles, we make education inclusive for everyone, regardless of ability or device.
               </p>
             </div>
@@ -286,8 +290,8 @@ export default function HomePage() {
                   <Accessibility className="w-12 h-12 text-primary dark:text-secondary visionease:text-primary high-contrast:text-primary" />
                 </CardHeader>
                 <CardContent className="text-center">
-                  <h3 className="text-xl font-semibold text-foreground mb-2">AI for IEPs</h3>
-                  <p className="text-muted-foreground">
+                  <h3 className="text-xl font-semibold dark:text-gray-800 text-foreground mb-2">AI for IEPs</h3>
+                  <p className="text-muted-foreground dark:text-gray-700">
                     Personalized IEPs for students with special needs, powered by AI.
                   </p>
                 </CardContent>
@@ -304,8 +308,8 @@ export default function HomePage() {
                   <Brain className="w-12 h-12 text-primary dark:text-secondary visionease:text-primary high-contrast:text-primary" />
                 </CardHeader>
                 <CardContent className="text-center">
-                  <h3 className="text-xl font-semibold text-foreground mb-2">IDD Support</h3>
-                  <p className="text-muted-foreground">
+                  <h3 className="text-xl font-semibold dark:text-gray-800 text-foreground mb-2">IDD Support</h3>
+                  <p className="text-muted-foreground dark:text-gray-700">
                     AI tools for students with Intellectual and Developmental Disabilities.
                   </p>
                 </CardContent>
@@ -322,8 +326,8 @@ export default function HomePage() {
                   <Target className="w-12 h-12 text-primary dark:text-secondary visionease:text-primary high-contrast:text-primary" />
                 </CardHeader>
                 <CardContent className="text-center">
-                  <h3 className="text-xl font-semibold text-foreground mb-2">Universal Design</h3>
-                  <p className="text-muted-foreground">
+                  <h3 className="text-xl font-semibold dark:text-gray-800 text-foreground mb-2">Universal Design</h3>
+                  <p className="text-muted-foreground dark:text-gray-700">
                     Inclusive design for all abilities and devices.
                   </p>
                 </CardContent>
@@ -411,7 +415,7 @@ export default function HomePage() {
                     <CardTitle className="text-xl sm:text-2xl text-foreground">{testimonial.name}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm sm:text-base text-muted-foreground">&quot;{testimonial.quote}&quot;</p>
+                    <p className="text-sm sm:text-base text-muted-foreground">"{testimonial.quote}"</p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -509,10 +513,10 @@ export default function HomePage() {
 
       {/* Mission & Vision */}
       <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gradient-gold-cyan dark:bg-gradient-gold-cyan visionease:bg-gradient-gray-dark high-contrast:bg-gradient-gray-dark text-center">
-        <h2 className="text-3xl sm:text-4xl font-orbitron font-bold text-foreground mb-4">
+        <h2 className="text-3xl sm:text-4xl font-orbitron font-bold dark:text-gray-800 text-foreground mb-4">
           Our Mission & Vision
         </h2>
-        <p className="text-lg sm:text-xl text-muted-foreground mb-4 max-w-3xl mx-auto">
+        <p className="text-lg sm:text-xl text-muted-foreground dark:text-gray-700 mb-4 max-w-3xl mx-auto">
           BIPOCA AI is on a mission to break down educational barriers for Black, Indigenous, People of Color, and Allies worldwide. We envision a future where education is limitless, powered by AI to provide personalized, accessible learning for every individual, regardless of location, device, or ability.
         </p>
         <Link href="/about">
@@ -524,10 +528,14 @@ export default function HomePage() {
 
       {/* Final Call-to-Action */}
       <section className="py-12 px-4 sm:px-6 lg:px-8 bg-background text-center">
-        <h2 className="text-3xl sm:text-4xl font-orbitron font-bold text-foreground mb-4">
+        <h2
+          className="text-3xl sm:text-4xl font-orbitron font-bold text-foreground mb-4 dark:[color:oklch(0.80_0.05_50)]"
+        >
           Ready to Transform Education?
         </h2>
-        <p className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+        <p
+          className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto dark:[color:oklch(0.60_0.05_50)]"
+        >
           Join millions of learners, educators, and districts using BIPOCA AI to empower the next generation. Start your journey today!
         </p>
         <Link href="/signup">
