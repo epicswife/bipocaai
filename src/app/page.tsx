@@ -99,13 +99,13 @@ export default function HomePage() {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <div className="w-32 h-32 mx-auto rounded-full flex items-center justify-center border-2 border-primary dark:border-secondary shadow-glow relative overflow-hidden group">
-              {/* Light mode radial gradient background */}
-              <div className="absolute inset-0 bg-gradient-radial from-[var(--color-white)] via-[var(--color-gold-300)]/20 to-[var(--color-cyan-400)]/40 group-hover:via-[var(--color-gold-300)]/30 group-hover:to-[var(--color-cyan-400)]/50 transition-all duration-500 dark:hidden"></div>
-              {/* Dark mode radial gradient background */}
-              <div className="absolute inset-0 bg-gradient-radial from-[var(--color-black)] via-[var(--color-gold-300)]/30 to-[var(--color-cyan-400)]/50 group-hover:via-[var(--color-gold-300)]/40 group-hover:to-[var(--color-cyan-400)]/60 transition-all duration-500 hidden dark:block"></div>
+              {/* Light mode: white background with black radial gradient */}
+              <div className="absolute inset-0 bg-[var(--color-white)] [background-image:radial-gradient(circle_at_center,var(--color-black)_0%,transparent_70%)] group-hover:[background-image:radial-gradient(circle_at_center,var(--color-black)_0%,transparent_60%)] transition-all duration-500 dark:hidden"></div>
+              {/* Dark mode: black background with white radial gradient */}
+              <div className="absolute inset-0 bg-[var(--color-black)] [background-image:radial-gradient(circle_at_center,var(--color-white)_0%,transparent_70%)] group-hover:[background-image:radial-gradient(circle_at_center,var(--color-white)_0%,transparent_60%)] transition-all duration-500 hidden dark:block"></div>
               {/* Content container with backdrop blur */}
               <div className="relative z-10 w-full h-full flex items-center justify-center backdrop-blur-md">
-                <span className="text-foreground dark:text-primary-foreground text-xl font-orbitron font-bold">BIPOCA AI</span>
+                <span className="text-foreground dark:text-primary text-xl font-orbitron font-bold">BIPOCA AI</span>
               </div>
             </div>
           </motion.div>
