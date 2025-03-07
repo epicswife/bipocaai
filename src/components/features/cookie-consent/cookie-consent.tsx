@@ -9,8 +9,24 @@ export default function CookieConsent() {
 
   useEffect(() => {
     setIsMounted(true);
-    setIsVisible(true);
+    // Check if user has already accepted cookies
+    const cookieConsent = localStorage.getItem('cookieConsent');
+    if (!cookieConsent) {
+      setIsVisible(true);
+    }
   }, []);
+
+  const handleAccept = () => {
+    // Store consent in localStorage
+    localStorage.setItem('cookieConsent', 'accepted');
+    setIsVisible(false);
+  };
+
+  const handleDecline = () => {
+    // Store decline in localStorage
+    localStorage.setItem('cookieConsent', 'declined');
+    setIsVisible(false);
+  };
 
   if (!isMounted || !isVisible) return null;
 
@@ -22,13 +38,13 @@ export default function CookieConsent() {
       <div className="mt-2 flex justify-end gap-2">
         <Button
           variant="ghost"
-          onClick={() => setIsVisible(false)}
+          onClick={handleDecline}
           className="text-muted-foreground hover:text-secondary dark:text-muted-foreground dark:hover:text-primary visionease:text-muted-foreground visionease:hover:text-primary high-contrast:text-muted-foreground high-contrast:hover:text-primary text-sm"
         >
           Decline
         </Button>
         <Button
-          onClick={() => setIsVisible(false)}
+          onClick={handleAccept}
           className="bg-primary hover:bg-secondary dark:bg-secondary dark:hover:bg-primary visionease:bg-primary visionease:hover:bg-secondary high-contrast:bg-primary high-contrast:hover:bg-primary text-primary-foreground text-sm"
         >
           Accept

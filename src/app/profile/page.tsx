@@ -1,31 +1,28 @@
 "use client";
 
-import { useAuth } from "@/lib/auth";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
+import { Loader2 } from "lucide-react";
 
-export default function ProfilePage() {
+export default function ProfileRedirectPage() {
   const { user, loading } = useAuth();
+  const router = useRouter();
 
-  if (loading) return <div className="text-center py-12">Loading...</div>;
-  if (!user) return <div className="text-center py-12">Please log in to view your profile.</div>;
+  useEffect(() => {
+    if (!loading && user) {
+      // Redirect to the role-specific profile page
+      router.push(`/dashboard/${user.role.toLowerCase()}/profile`);
+    } else if (!loading && !user) {
+      // If not logged in, redirect to login
+      router.push('/login');
+    }
+  }, [user, loading, router]);
 
   return (
-    <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-      <h1 className="text-4xl font-orbitron font-bold text-black dark:text-white mb-8">Your Profile</h1>
-      <div className="bg-white dark:bg-gray-700 rounded-lg p-6 shadow-glow">
-        <div className="mb-4">
-          <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">Email</label>
-          <Input value={user.email || ""} readOnly className="mt-1 bg-gray-100 dark:bg-gray-600" />
-        </div>
-        <div className="mb-4">
-          <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">Role</label>
-          <Input value="Student" readOnly className="mt-1 bg-gray-100 dark:bg-gray-600" /> {/* Mock role */}
-        </div>
-        <Button className="bg-amber-400 text-black hover:bg-gold-300 dark:bg-amber-600 dark:hover:bg-gold-500">
-          Save Changes
-        </Button>
-      </div>
+    <div className="flex flex-col items-center justify-center h-[60vh]">
+      <Loader2 className="h-8 w-8 animate-spin text-primary mb-4" />
+      <p className="text-muted-foreground">Redirecting to your profile...</p>
     </div>
   );
 }

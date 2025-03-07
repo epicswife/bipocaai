@@ -43,5 +43,7 @@ const mockLessons: Course[] = [
 export const fetchBlackFactsLessons = async () => {
   // Simulate API call with a delay
   await new Promise((resolve) => setTimeout(resolve, 1000));
+  // Consider adding a comment indicating this is temporary or implement actual API calls
+  // return mockLessons;
   return mockLessons;
 };

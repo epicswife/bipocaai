@@ -1,0 +1,63 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+    
+    function hasRole(role) {
+      return firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.role == role;
+    }
+    
+    function isValidImage() {
+      return request.resource.contentType.matches('image/.*')
+        && request.resource.size < 5 * 1024 * 1024; // 5MB max
+    }
+    
+    function isValidDocument() {
+      return request.resource.contentType.matches('application/pdf')
+        && request.resource.size < 10 * 1024 * 1024; // 10MB max
+    }
+
+    // Profile pictures
+    match /users/{userId}/profile/{fileName} {
+      allow read: if true;
+      allow write: if isAuthenticated() 
+        && isOwner(userId)
+        && isValidImage();
+    }
+
+    // Course materials
+    match /courses/{courseId}/{fileName} {
+      allow read: if true;
+      allow write: if isAuthenticated() 
+        && (hasRole('admin') || hasRole('teacher'))
+        && (isValidDocument() || isValidImage());
+    }
+
+    // IEP documents
+    match /iep-meetings/{meetingId}/{fileName} {
+      allow read: if isAuthenticated() && (
+        hasRole('admin') || 
+        hasRole('teacher') || 
+        hasRole('counselor') || 
+        hasRole('social_worker') ||
+        firestore.get(/databases/(default)/documents/iep-meetings/$(meetingId)).data.participantIds.hasAny([request.auth.uid])
+      );
+      allow write: if isAuthenticated() 
+        && (hasRole('admin') || hasRole('teacher') || hasRole('counselor') || hasRole('social_worker'))
+        && isValidDocument();
+    }
+
+    // Public assets
+    match /public/{fileName} {
+      allow read: if true;
+      allow write: if isAuthenticated() && hasRole('admin');
+    }
+  }
+}
