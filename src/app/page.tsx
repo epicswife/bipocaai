@@ -21,6 +21,9 @@ import {
   Smartphone,
   Accessibility,
   GraduationCap,
+  School,
+  Calendar,
+  Home,
 } from "lucide-react";
 
 // Image paths configuration
@@ -53,10 +56,11 @@ const partnerLogos = {
 
 // Role-based quick access data
 const roles = [
-  { role: "student", label: "I’m a Student", href: "/signup?role=student", icon: <GraduationCap className="w-8 h-8" /> },
-  { role: "teacher", label: "I’m a Teacher", href: "/signup?role=teacher", icon: <BookOpen className="w-8 h-8" /> },
-  { role: "parent", label: "I’m a Parent", href: "/signup?role=parent", icon: <Users className="w-8 h-8" /> },
-  { role: "admin", label: "District Admin", href: "/signup?role=admin", icon: <Building2 className="w-8 h-8" /> },
+  { role: "homeschool", label: "Homeschool", href: "/homeschool", icon: <Home className="w-8 h-8" /> },
+  { role: "student", label: "I’m a Student", href: "/auth/signup?role=student", icon: <GraduationCap className="w-8 h-8" /> },
+  { role: "teacher", label: "I’m a Teacher", href: "/auth/signup?role=teacher", icon: <BookOpen className="w-8 h-8" /> },
+  { role: "parent", label: "I’m a Parent", href: "/auth/signup?role=parent", icon: <Users className="w-8 h-8" /> },
+  { role: "admin", label: "District Admin", href: "/auth/signup?role=admin", icon: <Building2 className="w-8 h-8" /> },
 ];
 
 export default function HomePage() {
@@ -115,7 +119,7 @@ export default function HomePage() {
           <p className="text-xl sm:text-2xl md:text-3xl text-primary-foreground/90 mb-10 max-w-3xl mx-auto">
             Empowering Black, Indigenous, People of Color, and Allies with AI-driven education—accessible anywhere, on any device, for everyone.
           </p>
-          <Link href="/signup">
+          <Link href="/auth/signup">
             <Button
               className="px-8 py-4 text-lg font-semibold rounded-lg bg-primary hover:bg-secondary dark:bg-secondary dark:hover:bg-primary text-primary-foreground shadow-glow"
               aria-label="Get Started with BIPOCA AI"
@@ -555,6 +559,91 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Homeschool Section */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gradient-gold-cyan dark:bg-gradient-gold-cyan relative">
+        <div className="relative z-10">
+          <h2 className="text-3xl sm:text-4xl font-orbitron font-bold text-center text-primary-foreground mb-8">
+            Homeschool Hub
+          </h2>
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+              <div className="flex flex-col justify-center">
+                <h3 className="text-2xl font-semibold text-primary-foreground mb-4">
+                  Empower Your Homeschool Journey
+                </h3>
+                <p className="text-primary-foreground/90 mb-4">
+                  BIPOCA AI provides comprehensive tools for homeschool families. Create personalized lesson plans, track student progress, and access a rich library of culturally relevant educational resources&mdash;all in one place.
+                </p>
+                <p className="text-primary-foreground/90">
+                  Our AI-powered platform adapts to your child&apos;s learning style, making homeschooling more effective and engaging than ever before.
+                </p>
+                <div className="mt-6">
+                  <Link href="/homeschool">
+                    <Button className="bg-primary hover:bg-secondary dark:bg-secondary dark:hover:bg-primary text-primary-foreground shadow-glow">
+                      Explore Homeschool Hub
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="flex justify-center"
+              >
+                <div className="grid grid-cols-2 gap-4 w-full max-w-md">
+                  <Card className="bg-card border-primary dark:border-secondary shadow-glow glassmorphism">
+                    <CardHeader className="flex justify-center">
+                      <School className="w-12 h-12 text-primary dark:text-secondary" />
+                    </CardHeader>
+                    <CardContent className="text-center">
+                      <h3 className="text-xl font-semibold text-foreground mb-2">Lesson Planning</h3>
+                      <p className="text-primary-foreground/90">
+                        Create and organize lessons with AI assistance
+                      </p>
+                    </CardContent>
+                  </Card>
+                  <Card className="bg-card border-primary dark:border-secondary shadow-glow glassmorphism">
+                    <CardHeader className="flex justify-center">
+                      <Brain className="w-12 h-12 text-primary dark:text-secondary" />
+                    </CardHeader>
+                    <CardContent className="text-center">
+                      <h3 className="text-xl font-semibold text-foreground mb-2">Quiz Creation</h3>
+                      <p className="text-primary-foreground/90">
+                        Generate custom quizzes for any subject
+                      </p>
+                    </CardContent>
+                  </Card>
+                  <Card className="bg-card border-primary dark:border-secondary shadow-glow glassmorphism">
+                    <CardHeader className="flex justify-center">
+                      <Calendar className="w-12 h-12 text-primary dark:text-secondary" />
+                    </CardHeader>
+                    <CardContent className="text-center">
+                      <h3 className="text-xl font-semibold text-foreground mb-2">Schedule</h3>
+                      <p className="text-primary-foreground/90">
+                        Organize your homeschool calendar
+                      </p>
+                    </CardContent>
+                  </Card>
+                  <Card className="bg-card border-primary dark:border-secondary shadow-glow glassmorphism">
+                    <CardHeader className="flex justify-center">
+                      <Target className="w-12 h-12 text-primary dark:text-secondary" />
+                    </CardHeader>
+                    <CardContent className="text-center">
+                      <h3 className="text-xl font-semibold text-foreground mb-2">Progress Tracking</h3>
+                      <p className="text-primary-foreground/90">
+                        Monitor learning achievements
+                      </p>
+                    </CardContent>
+                  </Card>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Partner Ecosystem */}
       <section className="py-12 px-4 sm:px-6 lg:px-8 bg-background">
         <h2 className="text-3xl sm:text-4xl font-orbitron font-bold text-center text-foreground mb-8">
@@ -614,10 +703,10 @@ export default function HomePage() {
 
       {/* Mission & Vision */}
       <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gradient-gold-cyan dark:bg-gradient-gold-cyan text-center">
-        <h2 className="text-3xl sm:text-4xl font-orbitron font-bold text-foreground mb-4">
+        <h2 className="text-3xl sm:text-4xl font-orbitron font-bold text-black mb-4">
           Our Mission & Vision
         </h2>
-        <p className="text-lg sm:text-xl text-muted-foreground mb-4 max-w-3xl mx-auto">
+        <p className="text-lg sm:text-xl text-gray-700 mb-4 max-w-3xl mx-auto">
           BIPOCA AI is on a mission to break down educational barriers for Black, Indigenous, People of Color, and Allies worldwide. We envision a future where education is limitless, powered by AI to provide personalized, accessible learning for every individual, regardless of location, device, or ability.
         </p>
         <Link href="/about">
@@ -632,10 +721,10 @@ export default function HomePage() {
         <h2 className="text-3xl sm:text-4xl font-orbitron font-bold text-foreground mb-4 dark:[color:oklch(0.80_0.05_50)]">
           Ready to Transform Education?
         </h2>
-        <p className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto dark:[color:oklch(0.60_0.05_50)]">
+        <p className="text-lg sm:text-xl text-foreground mb-8 max-w-3xl mx-auto dark:[color:oklch(0.60_0.05_50)]">
           Join millions of learners, educators, and districts using BIPOCA AI to empower the next generation. Start your journey today!
         </p>
-        <Link href="/signup">
+        <Link href="/auth/signup">
           <Button className="px-8 py-4 text-lg font-semibold rounded-lg bg-primary hover:bg-secondary dark:bg-secondary dark:hover:bg-primary text-primary-foreground shadow-glow">
             Join BIPOCA AI Now
           </Button>

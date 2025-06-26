@@ -20,6 +20,8 @@ export const collections = {
   counselors: db.collection('counselors') as CollectionReference<CounselorData>,
   chatRooms: db.collection('chatRooms') as CollectionReference<ChatRoom>,
   notifications: db.collection('notifications') as CollectionReference<Notification>,
+  mentalHealthAssessments: db.collection('mentalHealthAssessments') as CollectionReference<MentalHealthAssessment>,
+  appointments: db.collection('appointments') as CollectionReference<MentalHealthAppointment>,
 } as const;
 
 // Type definitions
@@ -73,7 +75,39 @@ export interface Notification {
   createdAt: Timestamp;
 }
 
-import { RequestStatus, RequestPriority, CounselorStatus, ChatRoomMetadata } from '@/constants';
+// Type definitions for mental health assessment and appointments
+export interface MentalHealthAssessment {
+  userId: string;
+  userName?: string | null;
+  userEmail?: string | null;
+  anonymous: boolean;
+  answers: Record<string, number | string | string[]>;
+  score: {
+    anxiety: number;
+    depression: number;
+    stress: number;
+    wellbeing: number;
+  };
+  recommendedResources: string[];
+  timestamp: Timestamp;
+  createdAt: Timestamp;
+}
+
+export interface MentalHealthAppointment {
+  userId: string;
+  counselorId: string;
+  counselorName: string;
+  date: Timestamp;
+  time: string;
+  status: 'scheduled' | 'completed' | 'cancelled';
+  notes?: string;
+  topic?: string;
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
+}
+
+import { RequestStatus, RequestPriority, CounselorStatus } from '@/constants';
+import type { ChatRoomMetadata } from '@/types';
 
 // Utility functions
 export const createRef = <T>(collection: string, id: string): DocumentReference<T> => {
@@ -84,9 +118,10 @@ export const serverTimestamp = (): Timestamp => {
   return admin.firestore.Timestamp.now();
 };
 
-// Constants
+// Type-safe load weights using enum values
 export const LOAD_WEIGHTS: Record<RequestPriority, number> = {
-  low: 1,
-  medium: 2,
-  high: 3,
+  [RequestPriority.LOW]: 1,
+  [RequestPriority.MEDIUM]: 2,
+  [RequestPriority.HIGH]: 3,
+  [RequestPriority.URGENT]: 4
 } as const;

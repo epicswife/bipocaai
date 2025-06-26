@@ -1,5 +1,8 @@
 import { Timestamp } from 'firebase/firestore';
 
+// Re-export all chat types
+export * from './chat';
+
 export type UserRole = 'student' | 'teacher' | 'admin' | 'counselor' | 'social_worker' | 'parent';
 
 export interface LiveClass {

@@ -1,0 +1,79 @@
+/* Pan-African Color Scheme */
+:root {
+  --pan-green: #0f7c3d;
+  --pan-amber: #ffc107;
+  --pan-red: #e53935;
+  --pan-black: #1c1c1c;
+  --pan-teal: #00897b;
+  --pan-white: #ffffff;
+}
+
+/* Override background colors */
+.bg-gradient-gold-cyan {
+  background-image: linear-gradient(to right, var(--pan-green), var(--pan-amber)) !important;
+}
+
+.dark .bg-gradient-gold-cyan {
+  background-image: linear-gradient(135deg, var(--pan-black) 0%, #0f2c1d 50%, var(--pan-black) 100%) !important;
+  border-top: 4px solid var(--pan-red) !important;
+  border-bottom: 4px solid var(--pan-amber) !important;
+}
+
+/* Text colors */
+.text-primary, 
+.dark .text-primary {
+  color: var(--pan-green) !important;
+}
+
+.dark .text-primary {
+  color: var(--pan-amber) !important;
+}
+
+/* Force all text in dark mode to be white */
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6,
+.dark p,
+.dark span,
+.dark .text-gradient-contrast {
+  color: var(--pan-white) !important;
+  text-shadow: none !important;
+}
+
+/* Accent colors */
+.text-accent, 
+.dark .text-accent {
+  color: var(--pan-red) !important;
+}
+
+/* Button styles */
+.bg-primary {
+  background-color: var(--pan-green) !important;
+}
+
+.dark .bg-primary {
+  background-color: var(--pan-amber) !important;
+}
+
+.border-primary {
+  border-color: var(--pan-red) !important;
+}
+
+.dark .border-primary {
+  border-color: var(--pan-amber) !important;
+}
+
+/* Divider styles */
+.bg-gradient-to-r.from-primary.to-secondary {
+  background-image: linear-gradient(to right, var(--pan-green), var(--pan-red)) !important;
+}
+
+/* Ensure all text in dark mode is visible */
+.dark .text-gradient-contrast,
+.dark .text-foreground,
+.dark .text-muted-foreground {
+  color: var(--pan-white) !important;
+}

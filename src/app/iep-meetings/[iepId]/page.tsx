@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/lib/auth";
+import { useUser } from "@/lib/auth";
 import Link from "next/link";
 import { useRouter, useParams } from "next/navigation";
 import { Calendar, Clock, Users, FileText, ArrowLeft, Check, Pencil } from "lucide-react";
@@ -101,7 +101,7 @@ const demoIEPMeetings: IEPMeeting[] = [
 ];
 
 export default function IEPMeetingDetailPage() {
-  const { user, loading } = useAuth();
+  const { user, loading } = useUser();
   const router = useRouter();
   const params = useParams();
   const [activeTab, setActiveTab] = useState(0);

@@ -5,115 +5,130 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-sans: var(--font-sans);
-  --font-orbitron: var(--font-orbitron);
+  --font-sans: 'Arial, sans-serif'; /* Fallback font */
+  --font-orbitron: 'Orbitron, sans-serif'; /* Ensure this font is imported */
   --spacing: 0.25rem;
   --radius: 0.625rem;
 }
 
 :root {
-  /* Light Mode Colors */
-  --background: oklch(0.98 0.01 220); /* Clean white with a hint of teal */
-  --foreground: oklch(0.10 0.05 270); /* Deep navy (4.5:1 contrast) */
+  /* Light Mode Colors with Pan-African Theme */
+  --background: var(--color-pan-white); /* Clean white background */
+  --foreground: var(--color-pan-black); /* Black text */
   --card: oklch(0.99 0.005 220); /* Pure white for cards */
-  --card-foreground: oklch(0.10 0.05 270);
+  --card-foreground: var(--color-pan-black);
   --popover: oklch(0.99 0.005 220);
-  --popover-foreground: oklch(0.10 0.05 270);
-  --primary: oklch(0.80 0.25 50); /* Neon gold for primary actions */
-  --primary-foreground: oklch(0.10 0.05 270);
-  --secondary: oklch(0.80 0.25 200); /* Neon cyan for secondary actions */
-  --secondary-foreground: oklch(0.10 0.05 270);
+  --popover-foreground: var(--color-pan-black);
+  --primary: var(--color-pan-green); /* Green for primary actions */
+  --primary-foreground: var(--color-pan-white);
+  --secondary: var(--color-pan-amber); /* Amber for secondary actions */
+  --secondary-foreground: var(--color-pan-black);
   --muted: oklch(0.90 0.02 220); /* Light gray */
-  --muted-foreground: oklch(0.50 0.05 270); /* Medium navy (3:1 contrast) */
-  --accent: oklch(0.80 0.25 200); /* Same neon cyan for accents */
-  --accent-foreground: oklch(0.10 0.05 270);
-  --destructive: oklch(0.80 0.25 200); /* Cyan for destructive (avoid red for colorblind) */
-  --destructive-foreground: oklch(0.10 0.05 270);
+  --muted-foreground: oklch(0.40 0.05 270); /* Darker gray for better contrast */
+  --accent: var(--color-pan-teal); /* Teal for accents */
+  --accent-foreground: var(--color-pan-white);
+  --destructive: var(--color-pan-red); /* Red for destructive actions */
+  --destructive-foreground: var(--color-pan-white);
   --border: oklch(0.85 0.03 220);
   --input: oklch(0.85 0.03 220);
-  --ring: oklch(0.80 0.25 200); /* Cyan ring for focus */
-  --chart-1: oklch(0.80 0.25 50); /* Neon gold */
-  --chart-2: oklch(0.80 0.25 200); /* Neon cyan */
-  --chart-3: oklch(0.50 0.05 270); /* Medium navy */
-  --chart-4: oklch(0.85 0.03 220); /* Light gray */
-  --chart-5: oklch(0.70 0.05 270); /* Slightly darker navy */
+  --ring: var(--color-pan-teal); /* Teal ring for focus */
+  
+  /* Chart Colors */
+  --chart-1: var(--color-pan-amber); /* Amber */
+  --chart-2: var(--color-pan-green); /* Green */
+  --chart-3: var(--color-pan-red); /* Red */
+  --chart-4: var(--color-pan-teal); /* Teal */
+  --chart-5: oklch(0.70 0.05 270); /* Medium gray */
+  
+  /* Sidebar Colors */
   --sidebar: oklch(0.99 0.005 220);
-  --sidebar-foreground: oklch(0.10 0.05 270);
-  --sidebar-primary: oklch(0.80 0.25 50);
-  --sidebar-primary-foreground: oklch(0.10 0.05 270);
-  --sidebar-accent: oklch(0.80 0.25 200);
-  --sidebar-accent-foreground: oklch(0.10 0.05 270);
+  --sidebar-foreground: var(--color-pan-black);
+  --sidebar-primary: var(--color-pan-green);
+  --sidebar-primary-foreground: var(--color-pan-white);
+  --sidebar-accent: var(--color-pan-amber);
+  --sidebar-accent-foreground: var(--color-pan-black);
   --sidebar-border: oklch(0.85 0.03 220);
-  --sidebar-ring: oklch(0.80 0.25 200);
-  /* BIPOCA AI Colors */
-  --color-gold-300: oklch(0.80 0.25 50); /* Neon gold */
-  --color-cyan-400: oklch(0.80 0.25 200); /* Neon cyan */
-  --color-gray-100: oklch(0.99 0.005 220); /* Pure white */
-  --color-gray-900: oklch(0.10 0.05 270); /* Deep navy */
-  --color-white: oklch(1.00 0 0);
-  --color-black: oklch(0.00 0 0);
+  --sidebar-ring: var(--color-pan-teal);
+  /* BIPOCA AI Colors - Pan-African Theme */
+  --color-gold-300: var(--color-pan-amber); /* Pan-African amber/gold */
+  --color-cyan-400: var(--color-pan-green); /* Pan-African green */
+  --color-gray-100: var(--color-pan-white); /* White */
+  --color-gray-900: var(--color-pan-black); /* Pan-African black */
+  --color-white: var(--color-pan-white);
+  --color-black: var(--color-pan-black);
   --color-gray-300: oklch(0.90 0.02 220); /* Light gray */
-  --color-gray-700: oklch(0.50 0.05 270); /* Medium navy */
+  --color-gray-700: var(--color-pan-teal); /* Pan-African teal */
+  
+  /* Pan-African Colors */
+  --color-pan-green: oklch(0.52 0.18 160); /* Pan-African green #0f7c3d */
+  --color-pan-amber: oklch(0.85 0.20 85); /* Pan-African amber/gold #ffc107 */
+  --color-pan-red: oklch(0.60 0.25 25); /* Pan-African red #e53935 */
+  --color-pan-black: oklch(0.20 0.02 270); /* Pan-African black #1c1c1c */
+  --color-pan-teal: oklch(0.55 0.18 190); /* Pan-African teal accent #00897b */
+  --color-pan-white: oklch(1.00 0 0); /* White #ffffff */
   /* Shadow Colors for Light Mode */
-  --shadow-glow: oklch(0.80 0.25 50); /* Neon gold */
+  --shadow-glow: var(--color-pan-amber); /* Pan-African amber/gold */
   --shadow-opacity: 0.5;
   /* Glassmorphism Colors for Light Mode */
-  --glass-background: oklch(1.00 0 0); /* White */
+  --glass-background: var(--color-pan-white); /* White */
   --glass-background-opacity: 0.1;
-  --glass-border: oklch(1.00 0 0); /* White */
+  --glass-border: var(--color-pan-white); /* White */
   --glass-border-opacity: 0.2;
 }
 
 .dark {
-  /* Dark Mode Colors */
-  --background: oklch(0.03 0.03 270); /* Near-black with a navy tint */
-  --foreground: oklch(0.98 0.01 220); /* Pure white (4.5:1 contrast) */
-  --card: oklch(0.10 0.05 270); /* Slightly lighter navy */
-  --card-foreground: oklch(0.98 0.01 220);
-  --popover: oklch(0.03 0.03 270);
-  --popover-foreground: oklch(0.98 0.01 220);
-  --primary: oklch(0.90 0.30 50); /* Brighter neon gold with a glowing effect */
-  --primary-foreground: oklch(0.10 0.05 270);
-  --secondary: oklch(0.90 0.30 200); /* Brighter neon cyan */
-  --secondary-foreground: oklch(0.10 0.05 270);
-  --muted: oklch(0.20 0.05 270); /* Darker navy */
-  --muted-foreground: oklch(0.80 0.02 220); /* Light gray (3:1 contrast) */
-  --accent: oklch(0.90 0.30 200); /* Same neon cyan for accents */
-  --accent-foreground: oklch(0.10 0.05 270);
-  --destructive: oklch(0.90 0.30 200); /* Cyan for destructive */
-  --destructive-foreground: oklch(0.10 0.05 270);
-  --border: oklch(0.30 0.05 270);
-  --input: oklch(0.30 0.05 270);
-  --ring: oklch(0.90 0.30 200); /* Cyan ring for focus */
-  --chart-1: oklch(0.90 0.30 50);
-  --chart-2: oklch(0.90 0.30 200);
-  --chart-3: oklch(0.80 0.02 220);
-  --chart-4: oklch(0.20 0.05 270);
-  --chart-5: oklch(0.50 0.05 270);
-  --sidebar: oklch(0.10 0.05 270);
-  --sidebar-foreground: oklch(0.98 0.01 220);
-  --sidebar-primary: oklch(0.90 0.30 50);
-  --sidebar-primary-foreground: oklch(0.10 0.05 270);
-  --sidebar-accent: oklch(0.90 0.30 200);
-  --sidebar-accent-foreground: oklch(0.10 0.05 270);
+  /* Dark Mode Colors with Pan-African Theme */
+  --background: var(--color-pan-black); /* Black background */
+  --foreground: var(--color-pan-white); /* White text */
+  --card: oklch(0.25 0.02 270); /* Slightly lighter black for cards */
+  --card-foreground: var(--color-pan-white);
+  --popover: oklch(0.25 0.02 270);
+  --popover-foreground: var(--color-pan-white);
+  --primary: var(--color-pan-amber); /* Amber for primary actions */
+  --primary-foreground: var(--color-pan-black);
+  --secondary: var(--color-pan-green); /* Green for secondary actions */
+  --secondary-foreground: var(--color-pan-white);
+  --muted: oklch(0.30 0.02 270); /* Dark gray */
+  --muted-foreground: oklch(0.80 0.02 270); /* Light gray for better contrast */
+  --accent: var(--color-pan-red); /* Red for accents */
+  --accent-foreground: var(--color-pan-white);
+  --destructive: var(--color-pan-red); /* Red for destructive */
+  --destructive-foreground: var(--color-pan-white);
+  --border: oklch(0.30 0.02 270);
+  --input: oklch(0.30 0.02 270);
+  --ring: var(--color-pan-amber); /* Amber ring for focus */
+  /* Chart Colors */
+  --chart-1: var(--color-pan-amber); /* Amber */
+  --chart-2: var(--color-pan-green); /* Green */
+  --chart-3: var(--color-pan-red); /* Red */
+  --chart-4: var(--color-pan-teal); /* Teal */
+  --chart-5: oklch(0.50 0.05 270); /* Medium gray */
+  
+  /* Sidebar Colors */
+  --sidebar: oklch(0.25 0.02 270); /* Slightly lighter black */
+  --sidebar-foreground: var(--color-pan-white);
+  --sidebar-primary: var(--color-pan-amber);
+  --sidebar-primary-foreground: var(--color-pan-black);
+  --sidebar-accent: var(--color-pan-red);
+  --sidebar-accent-foreground: var(--color-pan-white);
   --sidebar-border: oklch(0.30 0.05 270);
-  --sidebar-ring: oklch(0.90 0.30 200);
-  /* Dark Mode Adjustments for BIPOCA AI Colors */
-  --color-gold-300: oklch(0.90 0.30 50);
-  --color-cyan-400: oklch(0.90 0.30 200);
-  --color-gray-100: oklch(0.80 0.02 220);
-  --color-gray-900: oklch(0.03 0.03 270);
-  --color-white: oklch(1.00 0 0);
-  --color-black: oklch(0.00 0 0);
-  --color-gray-300: oklch(0.70 0.03 220);
-  --color-gray-700: oklch(0.40 0.05 270);
+  --sidebar-ring: var(--color-pan-amber);
+  /* Dark Mode Adjustments for BIPOCA AI Colors - Pan-African Theme */
+  --color-gold-300: var(--color-pan-amber); /* Pan-African amber/gold */
+  --color-cyan-400: var(--color-pan-green); /* Pan-African green */
+  --color-gray-100: var(--color-pan-white); /* White */
+  --color-gray-900: var(--color-pan-black); /* Pan-African black */
+  --color-white: var(--color-pan-white);
+  --color-black: var(--color-pan-black);
+  --color-gray-300: oklch(0.70 0.03 220); /* Light gray */
+  --color-gray-700: var(--color-pan-teal); /* Pan-African teal */
   /* Shadow Colors for Dark Mode */
-  --shadow-glow: oklch(0.90 0.30 200); /* Neon cyan */
+  --shadow-glow: var(--color-pan-green); /* Pan-African green */
   --shadow-opacity: 0.5;
   /* Glassmorphism Colors for Dark Mode */
-  --glass-background: oklch(0.00 0 0); /* Black */
+  --glass-background: var(--color-pan-black); /* Black */
   --glass-background-opacity: 0.2;
-  --glass-border: oklch(1.00 0 0); /* White */
+  --glass-border: var(--color-pan-amber); /* Pan-African amber/gold */
   --glass-border-opacity: 0.3;
 }
 
@@ -302,8 +317,8 @@
   /* Glassmorphism Utility */
   .glassmorphism {
     background: color-mix(in oklch, var(--glass-background), transparent calc((1 - var(--glass-background-opacity)) * 100%));
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(5px); /* Reduced blur for better text clarity */
+    -webkit-backdrop-filter: blur(5px);
     border: 1px solid color-mix(in oklch, var(--glass-border), transparent calc((1 - var(--glass-border-opacity)) * 100%));
   }
   /* Color Utilities */
@@ -334,16 +349,70 @@
   }
   /* Gradient Utilities */
   .bg-gradient-gold-cyan {
-    background-image: linear-gradient(to right, var(--color-gold-300), var(--color-cyan-400));
+    background-image: linear-gradient(to right, var(--color-pan-green), var(--color-pan-amber));
   }
   .bg-gradient-gray-dark {
     background-image: linear-gradient(to right, var(--color-gray-100), var(--color-gray-900));
   }
   .dark .bg-gradient-gold-cyan {
-    background-image: linear-gradient(to right, oklch(0.90 0.30 50), oklch(0.90 0.30 200));
+    background-image: linear-gradient(135deg, #1c1c1c 0%, #0f2c1d 50%, #1c1c1c 100%) !important;
+    border-top: 4px solid var(--color-pan-red);
+    border-bottom: 4px solid var(--color-pan-amber);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .dark .bg-gradient-gold-cyan::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--color-pan-teal), transparent);
+    opacity: 0.6;
   }
   .dark .bg-gradient-gray-dark {
     background-image: linear-gradient(to right, oklch(0.80 0.02 220), oklch(0.03 0.03 270));
+  }
+  /* Updated Utility for Text on Gradients */
+  .text-gradient-contrast {
+    color: #0f2c1d; /* Deep green for light mode */
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2); /* Subtle shadow for separation */
+  }
+  /* Fix for purple text in dark mode */
+  .dark .text-gradient-contrast,
+  .dark h1,
+  .dark h2,
+  .dark h3,
+  .dark h4,
+  .dark h5,
+  .dark h6,
+  .dark p,
+  .dark span,
+  .dark .text-foreground,
+  .dark [class*="text-"] {
+    color: #ffffff !important; /* Pure white for maximum visibility */
+    text-shadow: none !important; /* No shadow to prevent blurriness */
+    background-image: none !important;
+    -webkit-background-clip: initial !important;
+    background-clip: initial !important;
+  }
+  /* Pan-African color scheme */
+  :root {
+    --color-pan-green: #0f7c3d; /* Green */
+    --color-pan-amber: #ffc107; /* Amber/Gold */
+    --color-pan-red: #e53935; /* Red */
+    --color-pan-black: #1c1c1c; /* Black */
+    --color-pan-teal: #00897b; /* Teal accent */
+  }
+  
+  /* Fallback for bg-clip-text issues */
+  .bg-clip-text-fallback {
+    color: var(--color-pan-amber); /* Amber fallback */
+  }
+  .dark .bg-clip-text-fallback {
+    color: #ffffff; /* Pure white fallback to match text-gradient-contrast */
   }
   /* Accessibility Utilities */
   .text-size-large {

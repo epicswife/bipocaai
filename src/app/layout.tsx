@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Orbitron } from "next/font/google";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import "./pan-african-theme.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/global/navbar";
 import Footer from "@/components/global/footer";
