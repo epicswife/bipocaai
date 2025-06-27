@@ -24,8 +24,12 @@ service cloud.firestore {
     // Users collection
     match /users/{userId} {
       allow read: if isAuthenticated();
-      allow create: if isAuthenticated() && isOwner(userId) && isValidUser();
-      allow update: if isAuthenticated() && (isOwner(userId) || hasRole('admin'));
+      // Allow users to create their own document during signup
+      allow create: if isAuthenticated() 
+        && request.auth.uid == userId 
+        && request.resource.data.keys().hasAll(['name', 'email', 'role'])
+        && request.resource.data.role in ['student', 'teacher', 'parent', 'admin', 'counselor', 'social_worker'];
+      allow update: if isAuthenticated() && (request.auth.uid == userId || hasRole('admin'));
       allow delete: if isAuthenticated() && hasRole('admin');
       
       // User's private data

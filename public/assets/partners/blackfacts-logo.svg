@@ -1,0 +1,5 @@
+<svg width="50" height="50" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+  <rect width="50" height="50" fill="#FFD700" rx="8"/>
+  <text x="25" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#000">BF</text>
+  <text x="25" y="42" text-anchor="middle" font-family="Arial, sans-serif" font-size="6" fill="#000">LOGO</text>
+</svg>

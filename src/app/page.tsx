@@ -47,11 +47,11 @@ const images = {
   },
 };
 
-// Partner logos (real paths)
+// Partner logos (placeholder SVGs)
 const partnerLogos = {
-  blackfacts: "/assets/partners/blackfacts-logo.png",
-  fau: "/assets/partners/fau-logo.png",
-  legacy: "/assets/partners/legacy-education-logo.png",
+  blackfacts: "/assets/partners/blackfacts-logo.svg",
+  fau: "/assets/partners/fau-logo.svg",
+  legacy: "/assets/partners/legacy-education-logo.svg",
 };
 
 // Role-based quick access data

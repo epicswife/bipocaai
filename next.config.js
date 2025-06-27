@@ -2,7 +2,6 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['i.pravatar.cc', 'images.unsplash.com'], // Allow images from pravatar.cc and unsplash
     remotePatterns: [
       {
         protocol: 'https',

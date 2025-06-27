@@ -52,10 +52,20 @@ export default function SignUpPage() {
         name,
         role,
         email,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
       });
 
+      // Wait a moment for the auth state to update
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Force refresh the user token to ensure the latest claims
+      await firebaseUser.getIdToken(true);
+      
       toast.success("Account created successfully!");
-      router.push("/dashboard");
+      
+      // Redirect to the role-specific dashboard
+      router.push(`/dashboard/${role}`);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       toast.error(error.message || "Error creating account");
