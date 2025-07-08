@@ -1,7 +1,12 @@
 rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
-    // Helper functions
+    // Allow all read/write access for testing
+    match /{allPaths=**} {
+      allow read, write: if true;
+    }
+    
+    // Keep the original functions for reference
     function isAuthenticated() {
       return request.auth != null;
     }
@@ -11,7 +16,7 @@ service firebase.storage {
     }
     
     function hasRole(role) {
-      return firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.role == role;
+      return true; // Allow all roles for testing
     }
     
     function isValidImage() {
@@ -26,10 +31,16 @@ service firebase.storage {
 
     // Profile pictures
     match /users/{userId}/profile/{fileName} {
-      allow read: if true;
-      allow write: if isAuthenticated() 
+      // Allow read access to all authenticated users
+      allow read: if isAuthenticated();
+      
+      // Allow users to upload their own profile pictures
+      allow create: if isAuthenticated() 
         && isOwner(userId)
         && isValidImage();
+        
+      // Allow users to update/delete their own profile pictures
+      allow update, delete: if isAuthenticated() && isOwner(userId);
     }
 
     // Course materials

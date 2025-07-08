@@ -180,7 +180,7 @@ export default function StudentProfilePage() {
               <Avatar className="h-24 w-24">
                 <AvatarImage src={avatarPreview || ""} />
                 <AvatarFallback className="bg-primary/10 text-primary text-xl">
-                  {user ? getInitials(user.name) : <UserCircle />}
+                  {user ? getInitials(user.displayName || '') : <UserCircle />}
                 </AvatarFallback>
               </Avatar>
               <label 
